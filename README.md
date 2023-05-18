@@ -1,4 +1,4 @@
-# Monolithic Node Backend boilerplate
+# Node CRUD App
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
@@ -11,7 +11,7 @@ It consists following layers:-
 - middlewares
 - controllers
 - services
-- models
+- file-handling
 
 Along with above main layers, it also contains various other sub-layers like:-
 
@@ -20,7 +20,6 @@ Along with above main layers, it also contains various other sub-layers like:-
 - providers
 - utils
 - scripts
-- database / migrations
 
 ## Installation
 
@@ -75,6 +74,14 @@ Along with above main layers, it also contains various other sub-layers like:-
     ```
 
   This would execute the code from ems/bin/www directory
+
+  ## Running Tests
+
+  You can run the tests for the Node.js CRUD application using the following command:
+
+  ```sh
+  npm test
+  ```
 
 ## Makefile Commands
 

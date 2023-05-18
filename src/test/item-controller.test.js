@@ -31,6 +31,34 @@ describe('Controller', () => {
       });
     });
 
+    it('should return items not found error when no items exist', async () => {
+      const req = {
+        body: {
+          metadata: {
+            limit: 10,
+            page: 1,
+          },
+          filter: 'test',
+          sort: 'asc',
+        },
+      };
+
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+      const expectedResponse = {
+        error_type: 'ITEM_NOT_FOUND',
+        message: 'Item not found',
+      };
+
+      jest.spyOn(itemService, 'getItems').mockResolvedValue(null);
+      await itemController.getItems(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith(expectedResponse);
+    });
+
     it('should return error response when getItems throws an error', async () => {
       const req = {
         body: {
@@ -81,6 +109,29 @@ describe('Controller', () => {
       });
     });
 
+    it('should return Item not created error when no items created', async () => {
+      const req = {
+        body: {
+          title: 'for testing',
+        },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      const expectedResponse = {
+        error_type: 'ITEM_NOT_CREATED',
+        message: 'Item not created',
+      };
+
+      jest.spyOn(itemService, 'createItem').mockResolvedValue(null);
+      await itemController.createItem(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith(expectedResponse);
+    });
+
     it('should return error response when createItem throws an error', async () => {
       const req = {
         body: {
@@ -124,6 +175,29 @@ describe('Controller', () => {
       expect(res.json).toHaveBeenCalledWith({
         item: mockItems,
       });
+    });
+
+    it('should return item not found error when no items found', async () => {
+      const req = {
+        params: {
+          id: 1,
+        },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      const expectedResponse = {
+        error_type: 'ITEM_NOT_FOUND',
+        message: 'Item not found',
+      };
+
+      jest.spyOn(itemService, 'getItemById').mockResolvedValue(null);
+      await itemController.getItemById(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith(expectedResponse);
     });
 
     it('should return error response when getItemById throws an error', async () => {
@@ -174,6 +248,29 @@ describe('Controller', () => {
       });
     });
 
+    it('should return Item could not be updated error when no items updated', async () => {
+      const req = {
+        params: {
+          id: 1,
+        },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      const expectedResponse = {
+        error_type: 'ITEM_NOT_UPDATED',
+        message: 'Item could not be updated.',
+      };
+
+      jest.spyOn(itemService, 'updateItemById').mockResolvedValue(null);
+      await itemController.updateItemById(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith(expectedResponse);
+    });
+
     it('should return error response when updateItemById throws an error', async () => {
       const req = {
         body: {
@@ -222,25 +319,27 @@ describe('Controller', () => {
       });
     });
 
-    it('should return 200 and deleteItemById', async () => {
+    it('should return Item could not be deleted error when no items deleted', async () => {
       const req = {
         params: {
-          id: 11,
+          id: 1,
         },
       };
       const res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
-      const mockItems = 'Id not found';
-      jest.spyOn(itemService, 'deleteItemById').mockResolvedValue(mockItems);
 
+      const expectedResponse = {
+        error_type: 'ITEM_NOT_DELETED',
+        message: 'Item could not be deleted',
+      };
+
+      jest.spyOn(itemService, 'deleteItemById').mockResolvedValue(null);
       await itemController.deleteItemById(req, res);
 
-      expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalledWith({
-        message: mockItems,
-      });
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.json).toHaveBeenCalledWith(expectedResponse);
     });
 
     it('should return error response when deleteItemById throws an error', async () => {

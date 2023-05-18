@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const itemController = require('../controllers/item');
-const dataValidator = require('../validators/item');
+const itemValidator = require('../validators/item');
 
 // @route GET api/items
 // @desc Get all items
@@ -17,7 +17,7 @@ router.get('/items', itemController.getItems);
 
 router.post(
   '/items',
-  [dataValidator.validateItemData],
+  [itemValidator.validateItemData],
   itemController.createItem,
 );
 
@@ -33,7 +33,7 @@ router.get('/items/:id', itemController.getItemById);
 
 router.put(
   '/items/:id',
-  [dataValidator.validateItemData],
+  [itemValidator.validateItemData],
   itemController.updateItemById,
 );
 

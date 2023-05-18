@@ -44,7 +44,7 @@ const getItemById = async (itemId) => {
   if (itemData) {
     return itemData;
   }
-  return 'Id not found';
+  return null;
 };
 
 const updateItemById = async (itemId, updatedItemData) => {
@@ -58,7 +58,7 @@ const updateItemById = async (itemId, updatedItemData) => {
     await writeDataToFile(data);
     return updatedItem;
   }
-  return 'Id not found';
+  return null;
 };
 
 const deleteItemById = async (itemId) => {
@@ -73,7 +73,7 @@ const deleteItemById = async (itemId) => {
       return 'Item is deleted';
     }
   }
-  return 'Id not found';
+  return null;
 };
 
 module.exports = {

@@ -19,6 +19,10 @@ const getItems = async (req, res) => {
         },
       });
     }
+    return res.status(404).json({
+      error_type: 'ITEM_NOT_FOUND',
+      message: 'Item not found',
+    });
   } catch (error) {
     return res.status(error.statusCode || 500).json({
       error_type: error.errorType || defaultErrorType,
@@ -38,6 +42,10 @@ const createItem = async (req, res) => {
         newItem,
       });
     }
+    return res.status(400).json({
+      error_type: 'ITEM_NOT_CREATED',
+      message: 'Item not created',
+    });
   } catch (error) {
     return res.status(error.statusCode || 500).json({
       error_type: error.errorType || defaultErrorType,
@@ -57,6 +65,10 @@ const getItemById = async (req, res) => {
         item,
       });
     }
+    return res.status(404).json({
+      error_type: 'ITEM_NOT_FOUND',
+      message: 'Item not found',
+    });
   } catch (error) {
     return res.status(error.statusCode || 500).json({
       error_type: error.errorType || defaultErrorType,
@@ -71,7 +83,7 @@ const updateItemById = async (req, res) => {
     const updatedItemData = req.body;
     const updatedItem = await itemService.updateItemById(
       parseInt(id, 10),
-      updatedItemData,
+      updatedItemData
     );
 
     if (updatedItem) {
@@ -79,6 +91,10 @@ const updateItemById = async (req, res) => {
         updatedItem,
       });
     }
+    return res.status(400).json({
+      error_type: 'ITEM_NOT_UPDATED',
+      message: 'Item could not be updated.',
+    });
   } catch (error) {
     return res.status(error.statusCode || 500).json({
       error_type: error.errorType || defaultErrorType,
@@ -97,6 +113,10 @@ const deleteItemById = async (req, res) => {
         message: deletedItem,
       });
     }
+    return res.status(400).json({
+      error_type: 'ITEM_NOT_DELETED',
+      message: 'Item could not be deleted',
+    });
   } catch (error) {
     return res.status(error.statusCode || 500).json({
       error_type: error.errorType || defaultErrorType,

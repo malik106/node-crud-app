@@ -1,7 +1,7 @@
 const express = require('express');
 const createError = require('http-errors');
 
-const routes = require('./src/routes/routes');
+const routes = require('./src/routes/item');
 
 const app = express();
 

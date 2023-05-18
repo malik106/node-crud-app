@@ -54,6 +54,18 @@ describe('File Handling', () => {
       expect(itemFileHandling.getItemById).toHaveBeenCalled();
       expect(result).toEqual(data);
     });
+    it('should return null', async () => {
+      const itemId = 21;
+
+      const message = null;
+
+      jest.spyOn(itemFileHandling, 'deleteItemById').mockResolvedValue(message);
+
+      const result = await itemFileHandling.deleteItemById(itemId);
+
+      expect(itemFileHandling.deleteItemById).toHaveBeenCalled();
+      expect(result).toEqual(message);
+    });
   });
 
   describe('updateItemById', () => {
@@ -68,11 +80,23 @@ describe('File Handling', () => {
 
       const result = await itemFileHandling.updateItemById(
         itemId,
-        updatedItemData,
+        updatedItemData
       );
 
       expect(itemFileHandling.updateItemById).toHaveBeenCalled();
       expect(result).toEqual(data);
+    });
+    it('should return null', async () => {
+      const itemId = 21;
+
+      const message = null;
+
+      jest.spyOn(itemFileHandling, 'deleteItemById').mockResolvedValue(message);
+
+      const result = await itemFileHandling.deleteItemById(itemId);
+
+      expect(itemFileHandling.deleteItemById).toHaveBeenCalled();
+      expect(result).toEqual(message);
     });
   });
 
@@ -90,10 +114,10 @@ describe('File Handling', () => {
       expect(result).toEqual(message);
     });
 
-    it('should return Id not found', async () => {
+    it('should return null', async () => {
       const itemId = 21;
 
-      const message = 'Id not found';
+      const message = null;
 
       jest.spyOn(itemFileHandling, 'deleteItemById').mockResolvedValue(message);
 
