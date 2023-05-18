@@ -40,15 +40,14 @@ const createItem = async (newItemData) => {
 
 const getItemById = async (itemId) => {
   const data = await readDataFromFile();
-  const item = data.item.find((item) => item.id === itemId);
-  if (item) {
-    return item;
+  const itemData = data.item.find((item) => item.id === itemId);
+  if (itemData) {
+    return itemData;
   }
   return 'Id not found';
 };
 
 const updateItemById = async (itemId, updatedItemData) => {
-
   const data = await readDataFromFile();
 
   const itemIndex = data.item.findIndex((item) => item.id === itemId);

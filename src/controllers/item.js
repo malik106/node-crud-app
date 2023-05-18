@@ -20,7 +20,6 @@ const getItems = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
     return res.status(error.statusCode || 500).json({
       error_type: error.errorType || defaultErrorType,
       error_message: error.errorMessage || defaultErrorMsg,

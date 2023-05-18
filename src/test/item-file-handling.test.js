@@ -68,7 +68,7 @@ describe('File Handling', () => {
 
       const result = await itemFileHandling.updateItemById(
         itemId,
-        updatedItemData
+        updatedItemData,
       );
 
       expect(itemFileHandling.updateItemById).toHaveBeenCalled();
