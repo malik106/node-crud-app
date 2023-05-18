@@ -36,8 +36,8 @@
     }
   },
   "lint-staged": {
-    "./*/**/*.{js,jsx,ts,tsx}": [
-      "eslint"
+    "./*/**/*.{js}": [
+      "./node_modules/.bin/eslint"
     ]
   }
 }

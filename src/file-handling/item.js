@@ -48,6 +48,7 @@ const getItemById = async (itemId) => {
 };
 
 const updateItemById = async (itemId, updatedItemData) => {
+
   const data = await readDataFromFile();
 
   const itemIndex = data.item.findIndex((item) => item.id === itemId);
