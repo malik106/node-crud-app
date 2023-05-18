@@ -83,7 +83,7 @@ const updateItemById = async (req, res) => {
     const updatedItemData = req.body;
     const updatedItem = await itemService.updateItemById(
       parseInt(id, 10),
-      updatedItemData
+      updatedItemData,
     );
 
     if (updatedItem) {
