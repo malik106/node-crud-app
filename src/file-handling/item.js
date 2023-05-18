@@ -1,4 +1,3 @@
-const { DEFAULT_PAGE, DEFAULT_LIMIT } = require('../constants/common');
 const {
   readDataFromFile,
   writeDataToFile,
@@ -18,8 +17,8 @@ const getItems = async (metadata, filter) => {
   data = sortData(data.item, sort);
 
   // Pagination
-  const start = ((page || DEFAULT_PAGE) - 1) * (limit || DEFAULT_LIMIT);
-  const end = start + (limit || DEFAULT_LIMIT);
+  const start = (page - 1) * limit;
+  const end = start + limit;
 
   const paginatedItems = data.slice(start, end);
 

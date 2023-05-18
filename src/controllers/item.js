@@ -1,3 +1,4 @@
+const { DEFAULT_LIMIT, DEFAULT_PAGE } = require('../constants/common');
 const itemService = require('../services/item');
 
 const defaultErrorType = 'INTERNAL_SERVER_ERROR';
@@ -7,6 +8,9 @@ const defaultErrorMsg = 'Something went wrong. Please try again later';
 const getItems = async (req, res) => {
   try {
     const { metadata, filter } = req.body;
+
+    metadata.limit = metadata.limit || DEFAULT_LIMIT;
+    metadata.page = metadata.page || DEFAULT_PAGE;
 
     const items = await itemService.getItems(metadata, filter);
 
@@ -83,7 +87,7 @@ const updateItemById = async (req, res) => {
     const updatedItemData = req.body;
     const updatedItem = await itemService.updateItemById(
       parseInt(id, 10),
-      updatedItemData,
+      updatedItemData
     );
 
     if (updatedItem) {
